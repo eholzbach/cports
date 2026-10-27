@@ -1,0 +1,24 @@
+prefer the libvirt/qemu (kvm2) driver over docker by default
+
+--- a/pkg/minikube/registry/drvs/docker/docker.go
++++ b/pkg/minikube/registry/drvs/docker/docker.go
+@@ -54,7 +54,7 @@
+ 		Init:     func(_ *run.CommandOptions) drivers.Driver { return kic.NewDriver(kic.Config{OCIBinary: oci.Docker}) },
+ 		Status:   status,
+ 		Default:  true,
+-		Priority: registry.HighlyPreferred,
++		Priority: registry.Preferred,
+ 		Parallel: true,
+ 	}); err != nil {
+ 		panic(fmt.Sprintf("register failed: %v", err))
+--- a/pkg/minikube/registry/drvs/kvm2/kvm2.go
++++ b/pkg/minikube/registry/drvs/kvm2/kvm2.go
+@@ -60,7 +60,7 @@
+ 		Config:   configure,
+ 		Status:   status,
+ 		Default:  true,
+-		Priority: registry.Preferred,
++		Priority: registry.HighlyPreferred,
+ 		Parallel: true,
+ 	}); err != nil {
+ 		panic(fmt.Sprintf("register failed: %v", err))

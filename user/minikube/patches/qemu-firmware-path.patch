@@ -1,0 +1,16 @@
+use the edk2 firmware shipped by qemu-edk2-firmware
+
+--- a/pkg/minikube/registry/drvs/qemu2/qemu2.go
++++ b/pkg/minikube/registry/drvs/qemu2/qemu2.go
+@@ -100,9 +100,9 @@
+ 
+ 	switch arch {
+ 	case "amd64":
+-		return "/usr/share/OVMF/OVMF_CODE.fd", nil
++		return "/usr/share/qemu/edk2-x86_64-code.fd", nil
+ 	case "arm64":
+-		return "/usr/share/AAVMF/AAVMF_CODE.fd", nil
++		return "/usr/share/qemu/edk2-aarch64-code.fd", nil
+ 	default:
+ 		return "", fmt.Errorf("unknown arch: %s", arch)
+ 	}

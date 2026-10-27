@@ -1,0 +1,15 @@
+prefer the qemu driver over docker by default on arm64 linux,
+where the kvm2 driver is unavailable
+
+--- a/pkg/minikube/registry/drvs/qemu2/qemu2.go
++++ b/pkg/minikube/registry/drvs/qemu2/qemu2.go
+@@ -47,6 +47,9 @@
+ 	if runtime.GOOS == "windows" {
+ 		priority = registry.Experimental
+ 	}
++	if runtime.GOOS == "linux" && runtime.GOARCH == "arm64" {
++		priority = registry.HighlyPreferred
++	}
+ 	if err := registry.Register(registry.DriverDef{
+ 		Name:  driver.QEMU2,
+ 		Alias: []string{driver.AliasQEMU},
