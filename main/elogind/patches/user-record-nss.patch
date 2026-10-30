@@ -1,0 +1,26 @@
+userdb.c calls functions in user-record-nss.c
+https://github.com/elogind/elogind/issues/367
+
+diff --git a/src/shared/meson.build b/src/shared/meson.build
+index 506c1bd..15e8c83 100644
+--- a/src/shared/meson.build
++++ b/src/shared/meson.build
+@@ -269,6 +269,7 @@ shared_sources = files(
+         'smack-util.c',
+         'sleep-config.c',
+         'udev-util.c',
++        'user-record-nss.c',
+         'user-record-show.c',
+         'user-record.c',
+         'userdb-dropin.c',
+@@ -279,10 +280,6 @@ shared_sources = files(
+         'xml.c',
+ )
+ 
+-if get_option('nss-elogind') != false
+-	shared_sources += files('user-record-nss.c')
+-endif
+-
+ #endif // 0
+ 
+ if get_option('tests') != 'false'
